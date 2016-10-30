@@ -1,9 +1,9 @@
-# This class can be used to convert data between an array, XML and/or JSON
+# Class Crypt - A wrapper for phpseclib (Cryptography)
 
 ## Installation
 Install the package using composer.
 ```
-composer require rudymas/xml_json
+composer require rudymas/crypt
 ```
 
 ## Usage example
