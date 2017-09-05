@@ -1,4 +1,5 @@
 <?php
+
 namespace RudyMas\Crypt;
 
 use phpseclib\Crypt\AES;
@@ -11,11 +12,11 @@ use RudyMas\Manipulator\Text;
  * Class Crypt - A wrapper for phpseclib (Cryptography)
  *
  * This class is used in combination with following class:
- *    - phpseclib (composer require phpseclib/phpseclib)
- *    - manipulator/text (composer require rudymas/manipulator)
+ *    - phpseclib (composer install phpseclib/phpseclib)
+ *    - manipulator/text (composer install rudymas/manipulator)
  *
- * @author      Rudy Mas <rudy.mas@rudymas.be>
- * @copyright   Copyright (c) 2016, rudymas.be. (http://www.rudymas.be/)
+ * @author      Rudy Mas <rudy.mas@rmsoft.be>
+ * @copyright   Copyright (c) 2016, rudymas.be. (http://www.rmsoft.be/)
  * @license     https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
  * @version     0.6.0
  * @package     RudyMas\Crypt
@@ -172,4 +173,5 @@ class Crypt
         $this->hash = '';
     }
 }
+
 /** End of File: Crypt.php **/
