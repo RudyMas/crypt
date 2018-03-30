@@ -1,21 +1,27 @@
 {
   "name": "rudymas/crypt",
   "description": "A wrapper for phpseclib (Cryptography)",
+  "version": "0.7.0",
   "type": "library",
   "license": "GPL-3.0",
   "authors": [
     {
       "name": "Rudy Mas",
-      "email": "rudy.mas@rudymas.be"
+      "email": "rudy.mas@rmsoft.be",
+      "homepage": "http;//www.rmsoft.be",
+      "role": "Developer"
     }
   ],
   "minimum-stability": "stable",
   "require": {
-    "php": ">= 5.4.0 || >= 7.0",
+    "php": ">= 7.1",
     "rudymas/manipulator": "*",
     "phpseclib/phpseclib": "2.*"
   },
   "autoload": {
+    "classmap": [
+      "src/"
+    ],
     "psr-4": {
       "RudyMas\\Crypt\\": "src/"
     }

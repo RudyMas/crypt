@@ -9,16 +9,17 @@ use phpseclib\Crypt\RSA;
 use RudyMas\Manipulator\Text;
 
 /**
- * Class Crypt - A wrapper for phpseclib (Cryptography)
+ * Class Crypt (PHP version 7.1)
+ * A wrapper for phpseclib (Cryptography)
  *
  * This class is used in combination with following class:
  *    - phpseclib (composer install phpseclib/phpseclib)
  *    - manipulator/text (composer install rudymas/manipulator)
  *
  * @author      Rudy Mas <rudy.mas@rmsoft.be>
- * @copyright   Copyright (c) 2016, rudymas.be. (http://www.rmsoft.be/)
+ * @copyright   2016-2018, rmsoft.be. (http://www.rmsoft.be/)
  * @license     https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version     0.6.0
+ * @version     0.7.0
  * @package     RudyMas\Crypt
  */
 class Crypt
@@ -31,11 +32,11 @@ class Crypt
      * To encrypt data with a certain type (AES, DES, ...)
      * $key, $iv and $hash information are saved
      *
-     * @param string $cryptType The method to use for encryption
-     * @param string $data The data to encrypt
-     * @return string               The encrypted data
+     * @param string $cryptType
+     * @param string $data
+     * @return string
      */
-    public function encrypt($cryptType, $data)
+    public function encrypt(string $cryptType, string $data): string
     {
         switch (strtoupper($cryptType)) {
             case 'DES':
@@ -87,11 +88,11 @@ class Crypt
      * To decrypt data with a certain type (AES, DES, ...)
      * $key, $iv and $hash information are saved
      *
-     * @param string $cryptType The Method of decryption to use
-     * @param string $data The date to decrypt
-     * @return string The decrypted data
+     * @param string $cryptType
+     * @param string $data
+     * @return string
      */
-    public function decrypt($cryptType, $data)
+    public function decrypt(string $cryptType, string $data): string
     {
         switch (strtoupper($cryptType)) {
             case 'DES':
@@ -136,37 +137,58 @@ class Crypt
         }
     }
 
-    public function getKey()
+    /**
+     * @return string
+     */
+    public function getKey(): string
     {
         return $this->key;
     }
 
-    public function setKey($key)
+    /**
+     * @param string $key
+     */
+    public function setKey(string $key)
     {
         $this->key = $key;
     }
 
-    public function getIv()
+    /**
+     * @return string
+     */
+    public function getIv(): string
     {
         return $this->iv;
     }
 
-    public function setIv($iv)
+    /**
+     * @param string $iv
+     */
+    public function setIv(string $iv)
     {
         $this->iv = $iv;
     }
 
-    public function getHash()
+    /**
+     * @return string
+     */
+    public function getHash(): string
     {
         return $this->hash;
     }
 
-    public function setHash($hash)
+    /**
+     * @param string $hash
+     */
+    public function setHash(string $hash)
     {
         $this->hash = $hash;
     }
 
-    public function resetAll()
+    /**
+     * Reset key, iv & hash
+     */
+    public function resetAll(): void
     {
         $this->key = '';
         $this->iv = '';
