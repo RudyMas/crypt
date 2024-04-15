@@ -9,7 +9,7 @@ use phpseclib\Crypt\RSA;
 use RudyMas\Manipulator\Text;
 
 /**
- * Class Crypt (PHP version 7.1)
+ * Class Crypt (PHP version 7.2)
  * A wrapper for phpseclib (Cryptography)
  *
  * This class is used in combination with following class:
@@ -17,9 +17,9 @@ use RudyMas\Manipulator\Text;
  *    - manipulator/text (composer install rudymas/manipulator)
  *
  * @author      Rudy Mas <rudy.mas@rmsoft.be>
- * @copyright   2016-2018, rmsoft.be. (http://www.rmsoft.be/)
+ * @copyright   2016-2024, rmsoft.be. (http://www.rmsoft.be/)
  * @license     https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version     0.7.0
+ * @version     0.9.0
  * @package     RudyMas\Crypt
  */
 class Crypt
@@ -54,7 +54,6 @@ class Crypt
                 $this->setHash(sha1($data));
                 // Encrypt the data and return it as a string
                 return $cipher->encrypt($data);
-                break;
             case 'AES':
                 $cipher = new AES();
                 $text = new Text();
@@ -70,7 +69,6 @@ class Crypt
                 $this->setHash(sha1($data));
                 // Encrypt the data and return it as a string
                 return $cipher->encrypt($data);
-                break;
             case 'RSA':
                 $rsa = new RSA();
 
@@ -78,7 +76,6 @@ class Crypt
                 $rsa->loadKey($this->getKey());
                 // Encrypt the data and return it as a string
                 return $rsa->encrypt($data);
-                break;
             default:
                 die("Cryptography for '$cryptType' not implemented yet!");
         }
@@ -108,7 +105,6 @@ class Crypt
                 $this->setHash(sha1($decrypt));
                 // Return the decrypted data
                 return $decrypt;
-                break;
             case 'AES':
                 $cipher = new AES();
 
@@ -122,19 +118,50 @@ class Crypt
                 $this->setHash(sha1($decrypt));
                 // Return the decrypted data
                 return $decrypt;
-                break;
             case 'RSA':
                 $rsa = new RSA();
 
                 // Load the RSA key outside this class through $crypt->setKey('...');
                 $rsa->loadKey($this->getKey());
                 // Encrypt the data and return it as a string
-                $decrypt = $rsa->decrypt($data);
-                return $decrypt;
-                break;
+                return $rsa->decrypt($data);
             default:
                 die("Cryptography for '$cryptType' not implemented yet!");
         }
+    }
+
+    /**
+     * Create a private key
+     *
+     * @param string|bool $password
+     * @return mixed
+     */
+    public function createPrivateKey($password = false)
+    {
+        $rsa = new RSA();
+        $rsa->setPrivateKeyFormat(RSA::PRIVATE_FORMAT_PKCS1);
+        $rsa->setPublicKeyFormat(RSA::PUBLIC_FORMAT_PKCS1);
+        $rsa->setComment('Private Key');
+        if ($password) $rsa->setPassword($password);
+        $keys = $rsa->createKey(2048);
+        return $keys['privatekey'];
+    }
+
+    /**
+     * Create a public key from a private key
+     *
+     * @param string $privateKey
+     * @param string|bool $password
+     * @return array|false|string
+     */
+    public function createPublicKey(string $privateKey, $password = false)
+    {
+        $rsa = new RSA();
+        $rsa->setPrivateKeyFormat(RSA::PRIVATE_FORMAT_PKCS1);
+        $rsa->setPublicKeyFormat(RSA::PUBLIC_FORMAT_PKCS1);
+        if ($password) $rsa->setPassword($password);
+        $rsa->loadKey($privateKey);
+        return $rsa->getPublicKey();
     }
 
     /**
@@ -195,5 +222,3 @@ class Crypt
         $this->hash = '';
     }
 }
-
-/** End of File: Crypt.php **/

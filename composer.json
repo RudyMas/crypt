@@ -14,9 +14,10 @@
   ],
   "minimum-stability": "stable",
   "require": {
-    "php": ">= 7.1",
+    "php": ">= 7.2",
     "rudymas/manipulator": "*",
-    "phpseclib/phpseclib": "3.*"
+    "phpseclib/phpseclib": "3.*",
+    "phpseclib/phpseclib2_compat": "1.*"
   },
   "autoload": {
     "classmap": [
