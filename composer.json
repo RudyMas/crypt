@@ -1,7 +1,7 @@
 {
   "name": "rudymas/crypt",
   "description": "A wrapper for phpseclib (Cryptography)",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "type": "library",
   "license": "GPL-3.0",
   "authors": [
@@ -16,7 +16,7 @@
   "require": {
     "php": ">= 7.1",
     "rudymas/manipulator": "*",
-    "phpseclib/phpseclib": "2.*"
+    "phpseclib/phpseclib": "3.*"
   },
   "autoload": {
     "classmap": [
